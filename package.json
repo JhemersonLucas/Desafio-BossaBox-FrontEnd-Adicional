@@ -23,6 +23,7 @@
     "yup": "^0.28.4"
   },
   "scripts": {
+    "port": "set PORT=3002",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "eject": "react-scripts eject"

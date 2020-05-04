@@ -63,6 +63,7 @@ export const FormContent = styled.div`
       color: #fff;
       transition: background-color 0.2s;
       font-weight: bold;
+      font-size: 20px;
 
       &:hover {
         background: ${shade(0.2, '#04d361')};

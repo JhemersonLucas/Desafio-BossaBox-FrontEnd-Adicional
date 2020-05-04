@@ -155,7 +155,7 @@ const DashBoard: React.FC = () => {
           <Input name="tags" icon={FiTag} placeholder="Tag1, Tag2" />
           <button type="submit">
             <FiCheck />
-            Pesquisar
+            Inserir
           </button>
         </Form>
         {inputError && <Error>{inputError}</Error>}
