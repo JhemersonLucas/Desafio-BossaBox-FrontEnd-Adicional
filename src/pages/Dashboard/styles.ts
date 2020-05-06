@@ -15,6 +15,16 @@ export const Content = styled.div`
   border: 2px solid #e6e6e6;
   position: relative;
   padding-bottom: 30px;
+
+  header {
+    padding: 10px 20px;
+    select {
+      height: 40px;
+      min-width: 150px;
+      border-radius: 8px;
+      padding-left: 10px;
+    }
+  }
 `;
 
 export const FormContent = styled.div`

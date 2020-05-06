@@ -53,6 +53,7 @@ interface FormData {
 const DashBoard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [tools, setTools] = useState<Tool[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
   const [inputError, setInputError] = useState('');
   const { addToast } = useToast();
 
@@ -64,6 +65,19 @@ const DashBoard: React.FC = () => {
       })
       .catch(err => console.log(err));
   }, []);
+
+  useEffect(() => {
+    if (tools.length > 0) {
+      const newTags: string[] = [];
+      // criar lista de tags
+      tools.forEach(e => {
+        e.tags.forEach(t => {
+          if (newTags.indexOf(t) === -1) newTags.push(t);
+        });
+      });
+      setTags(newTags);
+    }
+  }, [tools]);
 
   const handleRemoveTool = useCallback(async (id: string) => {
     try {
@@ -136,6 +150,13 @@ const DashBoard: React.FC = () => {
     [addToast],
   );
 
+  const handleFilter = useCallback(async op => {
+    if (op.target.value !== '') {
+      const response = await api.get(`/tools?tag=${op.target.value}`);
+      setTools(response.data);
+    }
+  }, []);
+
   return (
     <Container>
       <FormContent>
@@ -162,6 +183,16 @@ const DashBoard: React.FC = () => {
       </FormContent>
       <Content>
         <Title>Minhas ferramentas:</Title>
+        <header>
+          <select onChange={handleFilter}>
+            <option value="">Tags</option>
+            {tags.map(t => (
+              <option value={t} key={t}>
+                {t}
+              </option>
+            ))}
+          </select>
+        </header>
         <CountTools>
           Resultados:
           <b>{tools.length}</b>
