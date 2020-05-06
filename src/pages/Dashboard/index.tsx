@@ -72,10 +72,10 @@ const DashBoard: React.FC = () => {
       // criar lista de tags
       tools.forEach(e => {
         e.tags.forEach(t => {
-          if (newTags.indexOf(t) === -1) newTags.push(t);
+          if (tags.indexOf(t) === -1) newTags.push(t);
         });
       });
-      setTags(newTags);
+      setTags(state => [...tags, ...newTags]);
     }
   }, [tools]);
 
@@ -151,10 +151,10 @@ const DashBoard: React.FC = () => {
   );
 
   const handleFilter = useCallback(async op => {
-    if (op.target.value !== '') {
-      const response = await api.get(`/tools?tag=${op.target.value}`);
-      setTools(response.data);
-    }
+    // if (op.target.value !== '') {
+    const response = await api.get(`/tools?tag=${op.target.value}`);
+    setTools(response.data);
+    // }
   }, []);
 
   return (
